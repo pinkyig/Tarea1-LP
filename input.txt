@@ -1,0 +1,30 @@
+Manufacter-1.9141434-1.[#5AB-$50.301-circuitos-verdes,#78C-$6.320-chips-md60]
+Manufacter-2.18683024-5.[#78Z-$9.990-circuitos-rojos-ver2.0]
+(9141434-1.#5AB->Manufacter-2.x5.6)
+(18683024-5.#78Z->Manufacter-1.x0.8)
+hola
+Manufacter-3.20012447-2.[#79TR-$900-plastico,#9CTR-$800.690-envases-plasticos]
+M 4.8688823-8.[#620C-$891.001-centellas]
+M5.19001277-8.[#901A-$600-estrellitas]
+M-6.24932356-k.[#YIPI1-$9.999.990-cubo-rubik]
+M-7-0.12893004-3.[#1IPIY-$1-rubic-1x1]
+M-8-0.12893004-3.[#CR2-$82-rubic-12x12]
+m9-0.22485756-k.[#MAT1-$666.001-rubic-1x1]
+(Manufacter-3.plastico->Manufacter-2.x4)
+(18683024-5.#78Z->M 4.x1)
+(18683024-5.#78Z->M5.x2)
+(Manufacter-1.chips-md60->M-6.x9)
+(M-6.cubo-rubik->12893004-3.x0.2)
+(M-8.#CR2->22485756-k.x1)
+(M9.#MAT1->M 4.x1.0)
+ver_empresa M5
+ver_empresa 20012447-2
+buscar_MP M 4
+buscar_MP M-7
+buscar_MP 9141434-1
+ver_ventas Manufacter-1
+ver_ventas Manufacter-2
+VER EMPRESA Manufacter-3
+Manufacter-10.11985602-7.[#78Z-$9.990-circuitos-rojos-ver3.0]
+(Manufacter-1.chips-md60->Manufacter-1.x9)
+
