@@ -57,7 +57,7 @@ class GrafoDirigido:
         '''
         #validando si la empresa tiene un rut valido segun la formula de validacion de rut
         if not validarRut(empresa.rut):
-            escribirArchivo('errores.txt', f"El RUT '{empresa.rut}' de la empresa '{empresa.nombre}' no es válido.\n")
+            escribirArchivo('errores.txt', f"El RUT '{empresa.rut}' de la empresa '{empresa.nombre}' no es valido.\n")
             return
         
         #verificando si la empresa ya existe
@@ -75,7 +75,7 @@ class GrafoDirigido:
                 for p in emp.productos:
                     info_producto_otra_empresa = re.match(regex_infoProducto, p)
                     if info_producto_empresa.group(1) == info_producto_otra_empresa.group(1):
-                        escribirArchivo('output.txt', f"El producto '{info_producto_empresa.group(1)}' de la empresa '{empresa.nombre}' ya está asociado a otro producto en la red.\n")
+                        escribirArchivo('output.txt', f"El producto '{info_producto_empresa.group(1)}' de la empresa '{empresa.nombre}' ya esta asociado a otro producto en la red.\n")
                         return
         
         #agregando la empresa al diccionario de empresas
@@ -118,8 +118,9 @@ class GrafoDirigido:
         Esta función agrega una conexión entre dos empresas en la línea de producción.
         Si una o ambas empresas no existen en la línea de producción, se escribe un mensaje en el archivo 'output.txt' indicando que no se pudo crear la conexión.
         Si ambas empresas existen, se agrega la conexión entre ellas.
-        Si la empresa que vende no existe en la línea de producción, se escribe un mensaje en el archivo 'errores.txt' indicando que no se pudo crear la conexión.
-        Si la empresa que compra no existe en la línea de producción, se escribe un mensaje en el archivo 'errores.txt' indicando que no se pudo crear la conexión.
+        Si la empresa que vende y/o compra no existe en la línea de producción, se escribe un mensaje en el archivo 'errores.txt' indicando que no se pudo crear la conexión.
+        Si la empresa vende el mismo producto a la empresa compradora, se escribe un mensaje en el archivo 'output.txt' indicando que no se pudo crear la conexión.
+        Si la conexión crea un ciclo en el grafo, se escribe un mensaje en el archivo 'output.txt' indicando que no se pudo crear la conexión.
         '''
         empresa_vende_obj = self.buscar_empresa_por_nombre_o_rut(empresa_vende)
         empresa_compra_obj = self.buscar_empresa_por_nombre_o_rut(empresa_compra)
@@ -151,7 +152,7 @@ class GrafoDirigido:
 
         #Verificando si hay un ciclo en el grafo
         if self.verificadorCiclo(empresa_compra_obj.nombre, empresa_vende_obj.nombre, []):
-            escribirArchivo('output.txt', f"La venta {linea}crea un ciclo en la red. No se pudo crear la conexión.")
+            escribirArchivo('output.txt', f"La venta {linea} crea un ciclo en la red.")
             return
         
         #agregando la conexion al grafo
@@ -317,7 +318,7 @@ def buscarProducto(nombre_o_rut,itemID_itemName, grafo):
                 }
                 return producto_info
     else:
-        return "No se encontró ninguna empresa con el nombre o RUT especificado."
+        return "No se encontro ninguna empresa con el nombre o RUT especificado."
 
 
 def ver_informacion_empresa(nombre_o_rut, grafo):
@@ -340,7 +341,7 @@ def ver_informacion_empresa(nombre_o_rut, grafo):
         informacion += " ]"
         escribirArchivo('output.txt', informacion)
     else:
-        escribirArchivo('output.txt', "No se encontró ninguna empresa con el nombre/RUT especificado.(" + nombre_o_rut + ")")
+        escribirArchivo('output.txt', "No se encontro ninguna empresa con el nombre/RUT especificado.(" + nombre_o_rut + ")")
 
 def ver_ventas(nombre_o_rut, grafo):
     '''
@@ -368,7 +369,7 @@ def ver_ventas(nombre_o_rut, grafo):
 
         escribirArchivo('output.txt', ventas_info)
     else:
-        escribirArchivo('output.txt', "No se encontró ninguna empresa con el nombre/RUT especificado.(" + nombre_o_rut + ")")
+        escribirArchivo('output.txt', "No se encontro ninguna empresa con el nombre/RUT especificado.(" + nombre_o_rut + ")")
 
 
 

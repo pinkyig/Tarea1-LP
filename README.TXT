@@ -4,11 +4,18 @@
 -ROL: 202130524-6
 -RUT: 21233791-9
 
+
+*** NOTA IMPORTANTE ***
+
+Se agregaron algunos casos de prueba, con el fin de corroborar y demostrar el correcto funcionamiento
+de funciones y validaciones que no estaban presentes en al archivo de input entregado
+
+
 ***Instrucciones de ejecucion***
 
 Se debe contar con Python3 instalado en el Sistema Operativo(Se recomienda la ultima version dispible a la fecha).
 
-Se debe tener a mano un archivo de texto plano en el cual iran los comandos a ingresar en el programa
+Se debe tener a mano un archivo de texto plano de nombre "input.txt" en el cual iran los comandos a ingresar en el programa
     Ejemplos de comandos validos
         -Crear EMPRESA
             Manufacter-3.20012447-2.[#79TR-$900-plastico,#9CTR-$800.690-envases-plasticos]
