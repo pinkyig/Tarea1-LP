@@ -39,6 +39,7 @@ class GrafoDirigido:
         self.empresas = {}
         self.matriz_adyacencia = {}
 
+    
     #Agregar una empresa al grafo
     def agregar_empresa(self, empresa):
         '''
@@ -82,6 +83,27 @@ class GrafoDirigido:
         self.matriz_adyacencia[empresa.nombre] = {}
         print(f"Empresa {empresa.nombre} agregada.")
 
+    def verificadorCiclo(self, empresa_vende, empresa_compra, visitados):
+        '''
+        ***
+        empresa_vende : Tipo (String)
+        empresa_compra : Tipo (String)
+        visitados : Tipo (Lista de Strings)
+        ***
+        Retorno Tipo Boolean
+        ***
+        Esta función verifica si hay un ciclo en el grafo al agregar una conexión entre dos empresas.
+        Si hay un ciclo, devuelve True. Si no hay un ciclo, devuelve False.
+        '''
+        if empresa_vende == empresa_compra:
+            return True
+        visitados.append(empresa_vende)
+        for empresa in self.matriz_adyacencia[empresa_vende]:
+            if empresa not in visitados:
+                if self.verificadorCiclo(empresa, empresa_compra, visitados):
+                    return True
+        return False
+
     def agregar_conexion(self, empresa_vende, producto, cantidad, empresa_compra, linea):
         '''
         ***
@@ -112,9 +134,29 @@ class GrafoDirigido:
         if empresa_vende == empresa_compra:
             escribirArchivo('output.txt', f"No se pudo crear conexion {empresa_vende} no puede venderse a si mismo")
             return
+        
+        #Caso venta repetida
+
+        #Verificando si la empresa compradora ya se encuentra relacioada con la empresa vendedora
+        if empresa_compra_obj.nombre in self.matriz_adyacencia[empresa_vende_obj.nombre]:
+            #Verificando si el producto ya se encuentra relacionado con la empresa compradora
+            if producto in self.matriz_adyacencia[empresa_vende_obj.nombre][empresa_compra_obj.nombre]:
+                escribirArchivo('output.txt', f"No se pudo crear conexion {empresa_vende} ya vende {producto} a {empresa_compra}")
+                return
+            else:
+                #Agregando un nuevo valor al diccionario de la empresa vendedora
+                self.matriz_adyacencia[empresa_vende_obj.nombre][empresa_compra_obj.nombre] = (producto, cantidad)
+                print(f"Conexión entre {empresa_vende_obj.nombre} y {empresa_compra_obj.nombre} agregada.")
+                return
+
+        #Verificando si hay un ciclo en el grafo
+        if self.verificadorCiclo(empresa_compra_obj.nombre, empresa_vende_obj.nombre, []):
+            escribirArchivo('output.txt', f"La venta {linea}crea un ciclo en la red. No se pudo crear la conexión.")
+            return
+        
+        #agregando la conexion al grafo
         self.matriz_adyacencia[empresa_vende_obj.nombre][empresa_compra_obj.nombre] = (producto, cantidad)
         print(f"Conexión entre {empresa_vende_obj.nombre} y {empresa_compra_obj.nombre} agregada.")
-
 
     def buscar_empresa_por_nombre_o_rut(self, nombre_o_rut):
         '''
@@ -352,6 +394,7 @@ with open('input.txt', 'r') as archivo:
 
         elif re.match(regex_empresa, linea):
             empresa = parsear_linea(linea)
+
             grafo.agregar_empresa(empresa)
 
         elif re.match(regex_verEmpresa, linea):
@@ -376,6 +419,7 @@ with open('input.txt', 'r') as archivo:
 
 
 #Imprimiendo el grafo
-#print(grafo.matriz_adyacencia)
+print(grafo.matriz_adyacencia)
+print('Esta matriz de adyacencia se puede interpretar de la siguiente manera:\n')
 print(grafo.imprimir_conexiones())
 

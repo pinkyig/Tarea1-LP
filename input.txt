@@ -20,7 +20,7 @@ m9-0.22485756-k.[#MAT1-$666.001-rubic-1x1]
 ver_empresa M5
 ver_empresa 20012447-2
 buscar_MP M 4
-buscar_MP M-7
+buscar_MP M-7-0
 buscar_MP 9141434-1
 ver_ventas Manufacter-1
 ver_ventas Manufacter-2
